@@ -7,12 +7,7 @@ import java.util.List;
 public class PolicyHolder extends Customer{
     private List<Customer> dependents;
 
-    public PolicyHolder(){
-        super();
-        this.dependents = new ArrayList<Customer>();
-    }
-
-    public PolicyHolder(String id, String fullName){
+    public PolicyHolder(String id, String fullName, InsuranceCard insuranceCard){
         super(id, fullName);
         this.dependents = new ArrayList<Customer>();
     }
