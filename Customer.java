@@ -49,4 +49,6 @@ public abstract class Customer {
     public void setClaims(List<Claim> claims) {
         this.claims = claims;
     }
+
+
 }

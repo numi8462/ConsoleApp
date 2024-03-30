@@ -9,14 +9,13 @@ import java.util.Scanner;
 * @author <Youngho Kim - s3726115> 
 */ 
 public class ClaimSystem {
-    CustomerManager customerManager = new CustomerManager();
+
     List<Claim> claims = new ArrayList<>();
     List<Customer> customers = new ArrayList<>();
 
-
-
     public void readClaims(){
-        
+        CustomerManager customerManager = new CustomerManager();
+
         try (BufferedReader reader = new BufferedReader(new FileReader("claims.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {

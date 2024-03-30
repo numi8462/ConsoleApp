@@ -10,7 +10,7 @@ import java.util.List;
 public class Claim {
     private String id;
     private Date claimDate;
-    private Customer insuredPerson;
+    private String insuredPersonId;
     private String cardNumber;
     private Date examDate;
     private List<String> documents;
@@ -22,7 +22,7 @@ public class Claim {
     public Claim(){
         this.id = "";
         this.claimDate = new Date();
-        this.insuredPerson = null;
+        this.insuredPersonId = "";
         this.cardNumber = "";
         this.examDate = new Date();
         this.documents = null; //ClaimId_CardNumber_DocumentName.pdf
@@ -48,12 +48,12 @@ public class Claim {
         this.claimDate = claimDate;
     }
 
-    public Customer getInsuredPerson() {
-        return insuredPerson;
+    public String getInsuredPersonId() {
+        return insuredPersonId;
     }
 
-    public void setInsuredPerson(Customer insuredPerson) {
-        this.insuredPerson = insuredPerson;
+    public void setInsuredPerson(String insuredPersonId) {
+        this.insuredPersonId = insuredPersonId;
     }
 
     public String getCardNumber() {
@@ -106,7 +106,7 @@ public class Claim {
 
     @Override
     public String toString() {
-        return id + "," + claimDate + "," + insuredPerson.getId() + "," + cardNumber + "," + examDate + "," + String.join(";", documents) + "," + claimAmount + "," + status + "," + receiverBankingInfo;
+        return id + "," + claimDate + "," + insuredPersonId + "," + cardNumber + "," + examDate + "," + String.join(";", documents) + "," + claimAmount + "," + status + "," + receiverBankingInfo;
     }
 
     public static Claim fromString(String str,CustomerManager customerManager) {
@@ -114,7 +114,7 @@ public class Claim {
         Claim claim = new Claim();
         claim.id = parts[0];
         claim.claimDate = new Date(parts[1]); // You'll need to convert the string to a Date
-        claim.insuredPerson = customerManager.findCustomerById(parts[2]); // You'll need to find the Customer with this ID
+        claim.insuredPersonId = parts[2]; // You'll need to find the Customer with this ID
         claim.cardNumber = parts[3];
         claim.examDate = new Date(parts[4]); // You'll need to convert the string to a Date
         claim.documents = new ArrayList<>(Arrays.asList(parts[5].split(";")));

@@ -11,4 +11,15 @@ public class PolicyHolder extends Customer{
         super(id, fullName);
         this.dependents = new ArrayList<Customer>();
     }
+
+    public static PolicyHolder fromString(String str) {
+        String[] parts = str.split(",");
+        String id = parts[0];
+        String fullName = parts[1];
+        InsuranceCard insuranceCard = null;
+        List<Claim> claims = null;
+
+        return new PolicyHolder(id, fullName, insuranceCard);
+
+    }
 }
