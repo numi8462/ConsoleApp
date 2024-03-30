@@ -4,6 +4,7 @@
 
 import java.util.Date;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Claim {
@@ -15,7 +16,7 @@ public class Claim {
     private List<String> documents;
     private Double claimAmount;
     private String status;
-    private String reciverBankingInfo;
+    private String receiverBankingInfo;
 
 
     public Claim(){
@@ -27,7 +28,7 @@ public class Claim {
         this.documents = null; //ClaimId_CardNumber_DocumentName.pdf
         this.claimAmount = 0.0;
         this.status="Pending";
-        this.reciverBankingInfo = "Bank - Name - Number";
+        this.receiverBankingInfo = "Bank - Name - Number";
     }
 
     //getters and setters
@@ -95,26 +96,31 @@ public class Claim {
         this.status = status;
     }
 
-    public String getReciverBankingInfo() {
-        return reciverBankingInfo;
+    public String getReceiverBankingInfo() {
+        return receiverBankingInfo;
     }
 
     public void setReciverBankingInfo(String reciverBankingInfo) {
-        this.reciverBankingInfo = reciverBankingInfo;
+        this.receiverBankingInfo = reciverBankingInfo;
     }
 
     @Override
     public String toString() {
-        return "Claim{" +
-            "id='" + id + '\'' +
-            ", claimDate=" + claimDate +
-            ", insuredPerson=" + insuredPerson +
-            ", cardNumber='" + cardNumber + '\'' +
-            ", examDate=" + examDate +
-            ", documents=" + documents +
-            ", claimAmount=" + claimAmount +
-            ", status='" + status + '\'' +
-            ", reciverBankingInfo='" + reciverBankingInfo + '\'' +
-            '}';
+        return id + "," + claimDate + "," + insuredPerson.getId() + "," + cardNumber + "," + examDate + "," + String.join(";", documents) + "," + claimAmount + "," + status + "," + receiverBankingInfo;
+    }
+
+    public static Claim fromString(String str,CustomerManager customerManager) {
+        String[] parts = str.split(",");
+        Claim claim = new Claim();
+        claim.id = parts[0];
+        claim.claimDate = new Date(parts[1]); // You'll need to convert the string to a Date
+        claim.insuredPerson = customerManager.findCustomerById(parts[2]); // You'll need to find the Customer with this ID
+        claim.cardNumber = parts[3];
+        claim.examDate = new Date(parts[4]); // You'll need to convert the string to a Date
+        claim.documents = new ArrayList<>(Arrays.asList(parts[5].split(";")));
+        claim.claimAmount = Double.parseDouble(parts[6]);
+        claim.status = parts[7];
+        claim.receiverBankingInfo = parts[8];
+        return claim;
     }
 }

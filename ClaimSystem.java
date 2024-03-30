@@ -1,10 +1,36 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /** 
 * @author <Youngho Kim - s3726115> 
 */ 
 public class ClaimSystem {
+    CustomerManager customerManager = new CustomerManager();
+    List<Claim> claims = new ArrayList<>();
+    List<Customer> customers = new ArrayList<>();
+
+
+
+    public void readClaims(){
+        
+        try (BufferedReader reader = new BufferedReader(new FileReader("claims.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                claims.add(Claim.fromString(line,customerManager));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public static void main(String[] args) {
+        //reads claims txt
+        
         Scanner scanner = new Scanner(System.in);
         Menu menu = new Menu();
         while(true){
