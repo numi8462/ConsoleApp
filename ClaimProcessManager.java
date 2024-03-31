@@ -5,17 +5,19 @@ import java.util.List;
 
 public interface ClaimProcessManager {
     //add a claim
-    void add(Claim claim);
+    public void add(Claim claim);
 
     //update a claim
-    void update(Claim claim);
+    public void update(Claim claim);
 
     //delete a claim
-    void delete(Claim claim);
+    public void delete(Claim claim);
 
     //get one claim
-    Claim getOne(int id);
+    public Claim getOne(int id);
 
     //get all claims
-    List<Claim> getAll();
+    public List<Claim> getAll();
+
+    public void readClaimsFromFile();
 }

@@ -7,7 +7,7 @@ import java.util.List;
 public class PolicyHolder extends Customer{
     private List<Customer> dependents;
 
-    public PolicyHolder(String id, String fullName, InsuranceCard insuranceCard){
+    public PolicyHolder(String id, String fullName){
         super(id, fullName);
         this.dependents = new ArrayList<Customer>();
     }
@@ -16,10 +16,12 @@ public class PolicyHolder extends Customer{
         String[] parts = str.split(",");
         String id = parts[0];
         String fullName = parts[1];
-        InsuranceCard insuranceCard = null;
-        List<Claim> claims = null;
 
-        return new PolicyHolder(id, fullName, insuranceCard);
+        return new PolicyHolder(id, fullName);
 
+    }
+
+    public void addDependents(Dependent dependent){
+        dependents.add(dependent);
     }
 }
