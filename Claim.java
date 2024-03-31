@@ -3,6 +3,7 @@
 */ 
 
 import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -109,14 +110,31 @@ public class Claim {
         return id + "," + claimDate + "," + insuredPerson.getId() + "," + cardNumber + "," + examDate + "," + String.join(";", documents) + "," + claimAmount + "," + status + "," + receiverBankingInfo;
     }
 
-    public static Claim fromString(String str,CustomerManager customerManager) {
+    public static Claim fromString(String str, CustomerManager customerManager) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+
         String[] parts = str.split(",");
         Claim claim = new Claim();
         claim.id = parts[0];
-        claim.claimDate = new Date(parts[1]); // You'll need to convert the string to a Date
+
+        try {
+            date = formatter.parse(parts[1]);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        claim.claimDate = date; // You'll need to convert the string to a Date
         claim.insuredPerson = customerManager.findCustomerById(parts[2]); // You'll need to find the Customer with this ID
         claim.cardNumber = parts[3];
-        claim.examDate = new Date(parts[4]); // You'll need to convert the string to a Date
+
+        try {
+            date = formatter.parse(parts[4]);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        claim.examDate = date; // You'll need to convert the string to a Date
         claim.documents = new ArrayList<>(Arrays.asList(parts[5].split(";")));
         claim.claimAmount = Double.parseDouble(parts[6]);
         claim.status = parts[7];
@@ -124,12 +142,12 @@ public class Claim {
         return claim;
     }
 
-    public static List<Claim> listFromString(String str, CustomerManager customerManager) {
-        List<Claim> claims = new ArrayList<>();
-        String[] parts = str.split(";"); // Assuming claims are separated by semicolons in the file
-        for (String part : parts) {
-            claims.add(Claim.fromString(part, customerManager));
-        }
-        return claims;
-    }
+    // public static List<Claim> listFromString(String str) {
+    //     List<Claim> claims = new ArrayList<>();
+    //     String[] parts = str.split(";"); // Assuming claims are separated by semicolons in the file
+    //     for (String part : parts) {
+    //         claims.add(Claim.fromString(part));
+    //     }
+    //     return claims;
+    // }
 }

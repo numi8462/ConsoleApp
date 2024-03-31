@@ -11,44 +11,7 @@ import java.util.Scanner;
 public class Main implements ClaimProcessManager {
 
     List<Claim> claims = new ArrayList<>();
-    List<Customer> customers = new ArrayList<>();
-
-    public void readPolicyHolderFile(String filename){
-        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                PolicyHolder customer = PolicyHolder.fromString(line);
-                customers.add(customer);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void readDependentFile(String filename) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                Dependent customer = Dependent.fromString(line);
-                customers.add(customer);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void addCustomer(Customer customer) {
-        customers.add(customer);
-    }
-
-    public Customer findCustomerById(String id) {
-        for (Customer customer : customers) {
-            if (customer.getId().equals(id)) {
-                return customer;
-            }
-        }
-        return null; // or throw an exception
-    }
+   
 
     public void add(Claim claim){
 
@@ -66,16 +29,16 @@ public class Main implements ClaimProcessManager {
 
     //get one claim
     public Claim getOne(int id){
-
+        Claim claim = new Claim();
+        return claim;
     };
 
     //get all claims
     public List<Claim> getAll(){
-
+        return this.claims;
     };
 
-    public void readClaimsFromFile(){
-        CustomerManager customerManager = new CustomerManager();
+    public void readClaimsFromFile(String filename, CustomerManager customerManager){
 
         try (BufferedReader reader = new BufferedReader(new FileReader("claims.txt"))) {
             String line;
@@ -90,7 +53,10 @@ public class Main implements ClaimProcessManager {
 
     public static void main(String[] args) {
         //reads claims txt
-        
+        CustomerManager customerManager = new CustomerManager();
+        customerManager.readPolicyHolderFile("policyHolders.txt");
+        customerManager.readDependentFile("dependents.txt");
+        // customerManager.printCustomersInfo();
         Scanner scanner = new Scanner(System.in);
         Menu menu = new Menu();
         while(true){

@@ -18,6 +18,7 @@ public abstract class Customer {
         this.claims = new ArrayList<Claim>();
     }
 
+    //getters and setters
     public String getId() {
         return id;
     }
@@ -48,5 +49,10 @@ public abstract class Customer {
 
     public void setClaims(List<Claim> claims) {
         this.claims = claims;
+    }
+
+    @Override
+    public String toString(){
+        return "Customer id: " + id +  ", Full Name: " + fullName ;
     }
 }

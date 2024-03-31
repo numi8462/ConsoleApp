@@ -19,5 +19,5 @@ public interface ClaimProcessManager {
     //get all claims
     public List<Claim> getAll();
 
-    public void readClaimsFromFile();
+    public void readClaimsFromFile(String filename, CustomerManager customerManager);
 }

@@ -24,4 +24,5 @@ public class PolicyHolder extends Customer{
     public void addDependents(Dependent dependent){
         dependents.add(dependent);
     }
+
 }
