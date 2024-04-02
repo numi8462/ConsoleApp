@@ -1,8 +1,14 @@
-import java.util.Scanner;
-
 /** 
 * @author <Youngho Kim - s3726115> 
 */ 
+import java.util.List;
+import java.util.Scanner;
+import claims.Claim;
+import claims.ClaimManager;
+import claims.ClaimProcessManager;
+import customers.CustomerManager;
+
+
 public class Menu {
 
     // prints main menu
@@ -24,12 +30,33 @@ public class Menu {
 
     }
 
-    public void printSearchMenu(){
+    // Print search menu. search by claim or user's id
+    public void printSearchMenu(ClaimManager claimManager){
+        List<Claim> claims = claimManager.getClaims();
 
+        System.out.println("Type the claim ID or user's ID: ");
+
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        boolean isMatchFound = false;
+        for(Claim c : claims){
+            if (c.getId().equals(input) || c.getInsuredPerson().getId().equals(input)) {
+                System.out.println(c.toString());
+            }
+        }
+
+        if (!isMatchFound) {
+            System.out.println("Error!! No matching claim found");
+        }
     }
 
-    public void printShowAllMenu(){
-
+    // Show all clainms
+    public void printShowAllMenu(ClaimManager claimManager){
+        List<Claim> claims = claimManager.getClaims();
+        System.out.println("[ List of all Claims ]");
+        for(Claim c : claims){
+            System.out.println(c.toString());
+        }
     }
     
 }

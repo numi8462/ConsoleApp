@@ -28,7 +28,7 @@ public class Main {
         claimManager.readClaimsFromFile("claims.txt", customerManager);
         customerManager.addClaimsToCustomer(claimManager);
         customerManager.readInsuranceFile("insuranceCards.txt");
-        customerManager.printCustomersInfo();
+        // customerManager.printCustomersInfo();
         // claimManager.printClaims();
 
         Scanner scanner = new Scanner(System.in);
@@ -36,7 +36,9 @@ public class Main {
         Menu menu = new Menu();
 
         while(true){
+            // Main menu
             menu.printMainMenu();
+
             String input = scanner.nextLine();
             switch (input) {
                 case "1":
@@ -50,9 +52,11 @@ public class Main {
                     break;
                 case "4":
                     // Search a claim
+                    menu.printSearchMenu(claimManager);
                     break;
                 case "5":
                     // Show all claims
+                    menu.printShowAllMenu(claimManager);
                     break;
                 case "6":
                     System.out.println("Exiting System...");

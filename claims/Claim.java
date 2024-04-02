@@ -120,9 +120,9 @@ public class Claim {
         String claimFormattedDate = cDate.format(formatter);
         String examFormattedDate = eDate.format(formatter);
         
-        return "id: " + id 
+        return "Claim id: " + id 
         + ", Date: " + claimFormattedDate 
-        + ", InsuredPerson: " + null
+        + ", InsuredPerson: " + insuredPerson
         + ", Card Number: " + cardNumber 
         + ", Exam Date: " + examFormattedDate 
         + ", Documents: " + String.join(";", documents) 
