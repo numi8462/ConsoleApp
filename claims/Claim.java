@@ -1,12 +1,18 @@
 /** 
 * @author <Youngho Kim - s3726115> 
 */ 
-
+package claims;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import customers.Customer;
+import customers.CustomerManager;
 
 public class Claim {
     private String id;
@@ -107,7 +113,22 @@ public class Claim {
 
     @Override
     public String toString() {
-        return id + "," + claimDate + "," + insuredPerson.getId() + "," + cardNumber + "," + examDate + "," + String.join(";", documents) + "," + claimAmount + "," + status + "," + receiverBankingInfo;
+        //re format date objects for easy readability
+        LocalDate cDate = claimDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate eDate = claimDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String claimFormattedDate = cDate.format(formatter);
+        String examFormattedDate = eDate.format(formatter);
+        
+        return "id: " + id 
+        + ", Date: " + claimFormattedDate 
+        + ", InsuredPerson: " + null
+        + ", Card Number: " + cardNumber 
+        + ", Exam Date: " + examFormattedDate 
+        + ", Documents: " + String.join(";", documents) 
+        + ", Claim Amount: " + claimAmount 
+        + ", Status: " + status 
+        + ", Banking Info: " + receiverBankingInfo;
     }
 
     public static Claim fromString(String str, CustomerManager customerManager) {

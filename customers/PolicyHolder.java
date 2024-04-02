@@ -1,6 +1,8 @@
 /** 
 * @author <Youngho Kim - s3726115> 
 */ 
+
+package customers;
 import java.util.ArrayList;
 import java.util.List;
 

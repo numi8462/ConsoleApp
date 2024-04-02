@@ -1,6 +1,7 @@
 /** 
 * @author <Youngho Kim - s3726115> 
 */ 
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -8,57 +9,32 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Main implements ClaimProcessManager {
+import claims.Claim;
+import claims.ClaimManager;
+import claims.ClaimProcessManager;
+import customers.CustomerManager;
 
-    List<Claim> claims = new ArrayList<>();
-   
+public class Main {
 
-    public void add(Claim claim){
-
-    };
-
-    //update a claim
-    public void update(Claim claim){
-
-    };
-
-    //delete a claim
-    public void delete(Claim claim){
-
-    };
-
-    //get one claim
-    public Claim getOne(int id){
-        Claim claim = new Claim();
-        return claim;
-    };
-
-    //get all claims
-    public List<Claim> getAll(){
-        return this.claims;
-    };
-
-    public void readClaimsFromFile(String filename, CustomerManager customerManager){
-
-        try (BufferedReader reader = new BufferedReader(new FileReader("claims.txt"))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                claims.add(Claim.fromString(line,customerManager));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    };
-
-
+    
     public static void main(String[] args) {
-        //reads claims txt
+        
         CustomerManager customerManager = new CustomerManager();
+        ClaimManager claimManager = new ClaimManager();
+
+        //first read policyHolder then Depenedent then Claims. then adds claims to customers
         customerManager.readPolicyHolderFile("policyHolders.txt");
         customerManager.readDependentFile("dependents.txt");
-        // customerManager.printCustomersInfo();
+        claimManager.readClaimsFromFile("claims.txt", customerManager);
+        customerManager.addClaimsToCustomer(claimManager);
+        customerManager.readInsuranceFile("insuranceCards.txt");
+        customerManager.printCustomersInfo();
+        // claimManager.printClaims();
+
         Scanner scanner = new Scanner(System.in);
+
         Menu menu = new Menu();
+
         while(true){
             menu.printMainMenu();
             String input = scanner.nextLine();
