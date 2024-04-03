@@ -11,7 +11,7 @@ import java.util.List;
 
 import customers.CustomerManager;
 
-public class ClaimManager {
+public class ClaimManager implements ClaimProcessManager{
     List<Claim> claims = new ArrayList<>();
    
     public ClaimManager(){
@@ -35,7 +35,7 @@ public class ClaimManager {
     };
 
     //get one claim
-    public Claim getOne(int id){
+    public Claim getOne(String id){
         Claim claim = new Claim();
         return claim;
     };
