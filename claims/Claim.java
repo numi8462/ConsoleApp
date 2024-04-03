@@ -34,7 +34,7 @@ public class Claim {
         this.examDate = new Date();
         this.documents = null; //ClaimId_CardNumber_DocumentName.pdf
         this.claimAmount = 0.0;
-        this.status="Pending";
+        this.status="New"; //New, Processing, Done
         this.receiverBankingInfo = "Bank - Name - Number";
     }
 
@@ -107,7 +107,7 @@ public class Claim {
         return receiverBankingInfo;
     }
 
-    public void setReciverBankingInfo(String reciverBankingInfo) {
+    public void setReceiverBankingInfo(String reciverBankingInfo) {
         this.receiverBankingInfo = reciverBankingInfo;
     }
 

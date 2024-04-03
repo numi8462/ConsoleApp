@@ -20,6 +20,10 @@ public class CustomerManager{
         this.customers = new ArrayList<>();
     }
 
+    // Getters and Setters
+    public List<Customer> getCustomers() { return this.customers; }
+    public void setCustomers(List<Customer> customers) { this.customers = customers;}
+    
     //read policyHolder files and add to customers list
     public void readPolicyHolderFile(String filename){
         try (BufferedReader reader = new BufferedReader(new FileReader("files/"+filename))) {

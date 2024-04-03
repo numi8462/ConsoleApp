@@ -43,6 +43,7 @@ public class Main {
             switch (input) {
                 case "1":
                     // Add a claim
+                    menu.printAddMenu(customerManager, claimManager);
                     break;
                 case "2":
                     // Update a claim

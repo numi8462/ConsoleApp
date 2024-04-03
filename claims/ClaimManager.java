@@ -21,7 +21,7 @@ public class ClaimManager {
     public List<Claim>  getClaims() { return this.claims;}
 
     public void add(Claim claim){
-
+        claims.add(claim);
     };
 
     //update a claim
