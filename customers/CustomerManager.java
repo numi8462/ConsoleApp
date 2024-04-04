@@ -95,7 +95,7 @@ public class CustomerManager{
         for(Customer customer : customers){
             for(Claim claim : claims){
                 if(customer.getId() == claim.getInsuredPerson().getId()){
-                    customer.add(claim);
+                    customer.getClaims().add(claim);
                 }
             }
         }

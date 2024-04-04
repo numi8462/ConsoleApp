@@ -8,11 +8,11 @@ import customers.CustomerManager;
 
 public interface ClaimProcessManager {
 
-    //add a claim
-    public void add(Claim claim);
+    //add a new claim
+    public void add(ClaimManager claimManager);
 
     //update a claim
-    public void update(Claim claim);
+    public void update(Claim claim, ClaimManager claimManager);
 
     //delete a claim
     public void delete(Claim claim);
@@ -22,8 +22,6 @@ public interface ClaimProcessManager {
 
     //get all claims
     public List<Claim> getAll();
-
-    // public void readClaimsFromFile(String filename, CustomerManager customerManager);
 
     public void printClaims();
 }

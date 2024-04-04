@@ -115,7 +115,7 @@ public class Claim {
     public String toString() {
         //re format date objects for easy readability
         LocalDate cDate = claimDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        LocalDate eDate = claimDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate eDate = examDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String claimFormattedDate = cDate.format(formatter);
         String examFormattedDate = eDate.format(formatter);
@@ -162,13 +162,4 @@ public class Claim {
         claim.receiverBankingInfo = parts[8];
         return claim;
     }
-
-    // public static List<Claim> listFromString(String str) {
-    //     List<Claim> claims = new ArrayList<>();
-    //     String[] parts = str.split(";"); // Assuming claims are separated by semicolons in the file
-    //     for (String part : parts) {
-    //         claims.add(Claim.fromString(part));
-    //     }
-    //     return claims;
-    // }
 }
