@@ -1,2 +1,3 @@
-f-1234567890,2024-01-01,c-1234567,1234567890,2024-01-02,ClaimId_CardNumber_DocumentName.pdf,1000.00,New,Bank-Name-Number
-f-1234567891,2024-01-03,c-2345678,2345678901,2024-01-04,ClaimId_CardNumber_DocumentName.pdf,2000.00,Processing,Bank-Name-Number
+f-1234567890,2024-01-01,c-1234567,1234567890,2024-01-02,ClaimId_CardNumber_DocumentName.pdf,1000.0,New,Bank-Name-Number
+f-1234567891,2024-01-03,c-2345678,2345678901,2024-01-04,ClaimId_CardNumber_DocumentName.pdf,2000.0,Processing,Bank-Name-Number
+f-3775197608,2024-04-05,c-1234567,12344321,2024-04-01,f-3775197608_12344321_carcrash.pdf,444.0,New,shinhan-youngho-1234554321

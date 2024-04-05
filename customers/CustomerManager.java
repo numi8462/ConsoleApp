@@ -5,7 +5,9 @@
 package customers;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +26,7 @@ public class CustomerManager{
     public List<Customer> getCustomers() { return this.customers; }
     public void setCustomers(List<Customer> customers) { this.customers = customers;}
     
-    //read policyHolder files and add to customers list
+    // Read policyHolder files and add to customers list
     public void readPolicyHolderFile(String filename){
         try (BufferedReader reader = new BufferedReader(new FileReader("files/"+filename))) {
             String line;
@@ -37,7 +39,7 @@ public class CustomerManager{
         }
     }
 
-    //read dependents files and add to customers list
+    // Read dependents files and add to customers list
     public void readDependentFile(String filename) {
         try (BufferedReader reader = new BufferedReader(new FileReader("files/"+filename))) {
             String line;
@@ -50,7 +52,7 @@ public class CustomerManager{
         }
     }
 
-    //read insurance card file and sets each customers insurance card
+    // Read insurance card file and sets each customers insurance card
     public void readInsuranceFile(String filename) {
         try (BufferedReader reader = new BufferedReader(new FileReader("files/"+filename))) {
             String line;
@@ -89,6 +91,7 @@ public class CustomerManager{
         }
     }
 
+    // add the claims from claimManager to each customers
     public void addClaimsToCustomer(ClaimManager claimManager){
         List<Claim> claims = claimManager.getClaims();
 

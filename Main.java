@@ -2,21 +2,16 @@
 * @author <Youngho Kim - s3726115> 
 */ 
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
-
+import java.util.Iterator;
 import claims.Claim;
 import claims.ClaimManager;
-import claims.ClaimProcessManager;
 import customers.Customer;
 import customers.CustomerManager;
 
 public class Main {
 
+    //prints out main menu
     public static void printMainMenu(){
         System.out.println("Please select an option:");
         System.out.println("1. Add a claim");
@@ -27,6 +22,7 @@ public class Main {
         System.out.println("6. Exit");
     }
 
+    //prints add claim menu
     public static void printAddMenu(CustomerManager customerManager, ClaimManager claimManager){
         System.out.println("Customer List: ");
         int i = 1;
@@ -40,7 +36,7 @@ public class Main {
         boolean isMatchFound = false;
         for(Customer c : customerManager.getCustomers()){
             if (c.getId().equals(input)){
-                customerManager.findCustomerById(input).add(claimManager);
+                claimManager.add(c);
                 isMatchFound = true;
                 System.out.println("Added New claim!!");
             }
@@ -48,8 +44,11 @@ public class Main {
         if (!isMatchFound) {
             System.out.println("Error!! No matching customer found");
         }
+
+        claimManager.writeClaimsToFile("claims.txt");
     }
     
+    // prints update menu
     public static void printUpdateMenu(CustomerManager customerManager, ClaimManager claimManager){
         System.out.println("Claim List: ");
         int i = 1;
@@ -64,7 +63,7 @@ public class Main {
         for(Customer cust : customerManager.getCustomers()){
             for(Claim claim : cust.getClaims()){
                 if(claim.getId().equals(input)){
-                    cust.update(claim, claimManager);
+                    claimManager.update(claim);
                     isMatchFound=true;
                     System.out.println("Updated claim!!");
                 }
@@ -73,11 +72,43 @@ public class Main {
         if (!isMatchFound) {
             System.out.println("Error!! No matching claim found");
         }
+
+        claimManager.writeClaimsToFile("claims.txt");
     };
 
-    public static void printDeleteMenu(){
+    // prints delete menu
+    public static void printDeleteMenu(CustomerManager customerManager, ClaimManager claimManager){
+        System.out.println("Claim List: ");
+        int i = 1;
+        for(Claim c : claimManager.getClaims()){
+            System.out.println(i + ". ID: " + c.getId());
+            i++;
+        }
+        System.out.println("Type in the claim ID to delete: ");
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        boolean isMatchFound = false;
+        Iterator<Customer> customerIterator = customerManager.getCustomers().iterator();
+        while (customerIterator.hasNext()) {
+            Customer cust = customerIterator.next();
+            Iterator<Claim> claimIterator = cust.getClaims().iterator();
+            while (claimIterator.hasNext()) {
+                Claim claim = claimIterator.next();
+                if (claim.getId().equals(input)) {
+                    claimIterator.remove();
+                    claimManager.delete(input, cust);
+                    isMatchFound = true;
+                    System.out.println("Deleted claim!!");
+                }
+            }
+        }
+        if (!isMatchFound) {
+            System.out.println("Error!! No matching claim found");
+        }
 
+        claimManager.writeClaimsToFile("claims.txt");
     };
+
     public static void main(String[] args) {
         
         CustomerManager customerManager = new CustomerManager();
@@ -89,8 +120,6 @@ public class Main {
         claimManager.readClaimsFromFile("claims.txt", customerManager);
         customerManager.addClaimsToCustomer(claimManager);
         customerManager.readInsuranceFile("insuranceCards.txt");
-        // customerManager.printCustomersInfo();
-        // claimManager.printClaims();
 
         Scanner scanner = new Scanner(System.in);
 
@@ -110,7 +139,7 @@ public class Main {
                     break;
                 case "3":
                     // Delete a claim
-                    printDeleteMenu();
+                    printDeleteMenu(customerManager, claimManager);
                     break;
                 case "4":
                     // Search a claim

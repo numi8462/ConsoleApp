@@ -130,7 +130,8 @@ public class Claim {
         + ", Status: " + status 
         + ", Banking Info: " + receiverBankingInfo;
     }
-
+    
+    // for reading claims from file
     public static Claim fromString(String str, CustomerManager customerManager) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date = null;
@@ -161,5 +162,14 @@ public class Claim {
         claim.status = parts[7];
         claim.receiverBankingInfo = parts[8];
         return claim;
+    }
+
+    // for writing claims to file
+    public String toFileString() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String claimDateStr = formatter.format(this.claimDate);
+        String examDateStr = formatter.format(this.examDate);
+        String documentsStr = String.join(";", this.documents);
+        return this.id + "," + claimDateStr + "," + this.insuredPerson.getId() + "," + this.cardNumber + "," + examDateStr + "," + documentsStr + "," + this.claimAmount + "," + this.status + "," + this.receiverBankingInfo;
     }
 }

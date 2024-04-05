@@ -4,18 +4,18 @@ package claims;
 */ 
 import java.util.List;
 
-import customers.CustomerManager;
+import customers.Customer;
 
 public interface ClaimProcessManager {
 
     //add a new claim
-    public void add(ClaimManager claimManager);
+    public void add(Customer customer);
 
     //update a claim
-    public void update(Claim claim, ClaimManager claimManager);
+    public void update(Claim claim);
 
     //delete a claim
-    public void delete(Claim claim);
+    public void delete(String id, Customer customer);
 
     //get one claim
     public Claim getOne(String id);
