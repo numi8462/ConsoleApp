@@ -12,6 +12,8 @@ import java.nio.ByteBuffer;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -41,9 +43,19 @@ public class ClaimManager implements ClaimProcessManager{
         return false;
     }
 
-    // Sort claims according to date oldest to newest
-    public void sortClaim(){
-
+    // Sort claims according to date oldest to newest (Bubble sort)
+    public void sortClaims(List<Claim> claims) {
+        int n = claims.size();
+        for (int i = 0; i < n-1; i++) {
+            for (int j = 0; j < n-i-1; j++) {
+                if (claims.get(j).getClaimDate().after(claims.get(j+1).getClaimDate())) {
+                    // Swap claims.get(j) and claims.get(j+1)
+                    Claim temp = claims.get(j);
+                    claims.set(j, claims.get(j+1));
+                    claims.set(j+1, temp);
+                }
+            }
+        }
     }
 
     //find claim by id
@@ -193,10 +205,13 @@ public class ClaimManager implements ClaimProcessManager{
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        sortClaims(claims);
     };
 
     // Write claims data to a file
     public void writeClaimsToFile(String filename) {
+        sortClaims(claims);
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("files/"+filename))) {
             for (Claim claim : claims) {
                 writer.write(claim.toFileString());

@@ -120,7 +120,6 @@ public class Main {
         claimManager.readClaimsFromFile("claims.txt", customerManager);
         customerManager.addClaimsToCustomer(claimManager);
         customerManager.readInsuranceFile("insuranceCards.txt");
-
         Scanner scanner = new Scanner(System.in);
 
         while(true){
