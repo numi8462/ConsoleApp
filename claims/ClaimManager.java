@@ -217,8 +217,12 @@ public class ClaimManager implements ClaimProcessManager{
 
     // prints claims
     public void printClaims(){
-        for(Claim  c : claims){
-            System.out.println(c.toString());
+        List<Claim> claims = this.getClaims();
+        System.out.println("[ List of all Claims ]");
+        int i = 1;
+        for(Claim c : claims){
+            System.out.println(i+". "+c.toString()+"\n");
+            i++;
         }
     }
 
@@ -240,17 +244,6 @@ public class ClaimManager implements ClaimProcessManager{
 
         if (!isMatchFound) {
             System.out.println("Error!! No matching claim found");
-        }
-    }
-
-    // Show all clainms
-    public void printShowAllMenu(){
-        List<Claim> claims = this.getClaims();
-        System.out.println("[ List of all Claims ]");
-        int i = 1;
-        for(Claim c : claims){
-            System.out.println(i+". "+c.toString()+"\n");
-            i++;
         }
     }
 

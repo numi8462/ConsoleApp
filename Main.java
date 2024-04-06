@@ -144,7 +144,7 @@ public class Main {
                     break;
                 case "5":
                     // Show all claims
-                    claimManager.printShowAllMenu();
+                    claimManager.printClaims();
                     break;
                 case "6":
                     System.out.println("Exiting System...");
