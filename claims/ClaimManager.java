@@ -116,7 +116,7 @@ public class ClaimManager implements ClaimProcessManager{
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Enter new card number:");
-        claim.setCardNumber(scanner.nextInt());
+        claim.setCardNumber(scanner.nextLine());
 
         System.out.println("Enter exam date (yyyy-MM-dd):");
         try {
