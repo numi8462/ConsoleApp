@@ -110,22 +110,20 @@ public class Main {
     };
 
     public static void main(String[] args) {
-        
         CustomerManager customerManager = new CustomerManager();
         ClaimManager claimManager = new ClaimManager();
 
         //first read policyHolder then Depenedent then Claims. then adds claims to customers
         customerManager.readPolicyHolderFile("policyHolders.txt");
         customerManager.readDependentFile("dependents.txt");
-        claimManager.readClaimsFromFile("claims.txt", customerManager);
+        claimManager.readClaimsToFile("claims.txt", customerManager);
         customerManager.addClaimsToCustomer(claimManager);
         customerManager.readInsuranceFile("insuranceCards.txt");
-        Scanner scanner = new Scanner(System.in);
 
+        Scanner scanner = new Scanner(System.in);
         while(true){
             // Main menu
             printMainMenu();
-
             String input = scanner.nextLine();
             switch (input) {
                 case "1":

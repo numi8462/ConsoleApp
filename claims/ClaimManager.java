@@ -27,11 +27,14 @@ import customers.CustomerManager;
 public class ClaimManager implements ClaimProcessManager{
     List<Claim> claims = new ArrayList<>();
    
+    // Constructor
     public ClaimManager(){
         this.claims = new ArrayList<>();
     }
 
+    // Getter and Setter
     public List<Claim>  getClaims() { return this.claims;}
+    public void setClaims(List<Claim> claims){this.claims = claims;}
 
     // Method to check if a Claim ID is duplicate
     public boolean isDuplicate(String id, List<Claim> claims) {
@@ -56,16 +59,6 @@ public class ClaimManager implements ClaimProcessManager{
                 }
             }
         }
-    }
-
-    //find claim by id
-    public Claim findClaimById(String id) {
-        for (Claim c : claims) {
-            if (c.getId().equals(id)) {
-                return c;
-            }
-        }
-        return null; // or throw an exception
     }
 
     //Adds new claim
@@ -123,7 +116,7 @@ public class ClaimManager implements ClaimProcessManager{
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Enter new card number:");
-        claim.setCardNumber(scanner.nextLine());
+        claim.setCardNumber(scanner.nextInt());
 
         System.out.println("Enter exam date (yyyy-MM-dd):");
         try {
@@ -195,7 +188,7 @@ public class ClaimManager implements ClaimProcessManager{
     };
 
     // Reads claims from claim text files
-    public void readClaimsFromFile(String filename, CustomerManager customerManager){
+    public void readClaimsToFile(String filename, CustomerManager customerManager){
 
         try (BufferedReader reader = new BufferedReader(new FileReader("files/"+filename))) {
             String line;

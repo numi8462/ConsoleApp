@@ -3,21 +3,18 @@
 */ 
 
 package customers;
-
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import claims.ClaimManager;
 import claims.Claim;
 
 public class CustomerManager{
     List<Customer> customers = new ArrayList<>();
 
+    // Constructor
     public CustomerManager(){
         this.customers = new ArrayList<>();
     }
@@ -67,11 +64,6 @@ public class CustomerManager{
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    //adds customer to customers list
-    public void addCustomer(Customer customer) {
-        customers.add(customer);
     }
 
     //find customer by id
