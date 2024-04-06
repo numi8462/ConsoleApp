@@ -99,8 +99,18 @@ public class ClaimManager implements ClaimProcessManager{
         }
         newClaim.setDocuments(documents);
 
-        System.out.println("Enter claim amount:");
-        newClaim.setClaimAmount(scanner.nextDouble());
+        double claimAmount;
+        while (true) {
+            System.out.println("Enter claim amount:");
+            if (scanner.hasNextDouble()) {
+                claimAmount = scanner.nextDouble();
+                newClaim.setClaimAmount(claimAmount);
+                break;
+            } else {
+                System.out.println("Invalid input. Please enter a number.");
+                scanner.next();  // discard the invalid input
+            }
+        }
 
         newClaim.setStatus("New");
 
@@ -218,7 +228,7 @@ public class ClaimManager implements ClaimProcessManager{
     // prints claims
     public void printClaims(){
         List<Claim> claims = this.getClaims();
-        System.out.println("[ List of all Claims ]");
+        System.out.println("[ List of all Claims ] (Old to New)");
         int i = 1;
         for(Claim c : claims){
             System.out.println(i+". "+c.toString()+"\n");
