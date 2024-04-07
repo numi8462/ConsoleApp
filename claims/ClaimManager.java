@@ -235,26 +235,4 @@ public class ClaimManager implements ClaimProcessManager{
             i++;
         }
     }
-
-    // Print search menu. search by claim or user's id
-    public void printSearchMenu(){
-        List<Claim> claims = this.getClaims();
-
-        System.out.println("Type the claim ID or user's ID: ");
-
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-        boolean isMatchFound = false;
-        for(Claim c : claims){
-            if (c.getId().equals(input) || c.getInsuredPerson().getId().equals(input)) {
-                System.out.println(c.toString());
-                isMatchFound=true;
-            }
-        }
-
-        if (!isMatchFound) {
-            System.out.println("Error!! No matching claim found");
-        }
-    }
-
 }

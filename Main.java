@@ -4,6 +4,8 @@
 
 import java.util.Scanner;
 import java.util.Iterator;
+import java.util.List;
+
 import claims.Claim;
 import claims.ClaimManager;
 import customers.Customer;
@@ -109,6 +111,24 @@ public class Main {
         claimManager.writeClaimsToFile("claims.txt");
     };
 
+    // Print search menu. search by claim or user's id
+    public static void printSearchMenu(ClaimManager claimManager){
+        List<Claim> claims = claimManager.getClaims();
+        System.out.println("Type the claim ID or user's ID: ");
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        boolean isMatchFound = false;
+        for(Claim c : claims){
+            if (c.getId().equals(input) || c.getInsuredPerson().getId().equals(input)) {
+                System.out.println(c.toString());
+                isMatchFound=true;
+            }
+        }
+        if (!isMatchFound) {
+            System.out.println("Error!! No matching claim found");
+        }
+    }
+
     public static void main(String[] args) {
         CustomerManager customerManager = new CustomerManager();
         ClaimManager claimManager = new ClaimManager();
@@ -140,7 +160,7 @@ public class Main {
                     break;
                 case "4":
                     // Search a claim
-                    claimManager.printSearchMenu();
+                    printSearchMenu(claimManager);
                     break;
                 case "5":
                     // Show all claims
