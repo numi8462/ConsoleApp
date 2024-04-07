@@ -1,6 +1,6 @@
-#Assignment 1: Build a console app
+**Assignment 1: Build a console app**
 
-## Installation and Usage
+Installation and Usage
 
 This application's entry point is the `Main.java` class. To start the application, follow these steps:
 
